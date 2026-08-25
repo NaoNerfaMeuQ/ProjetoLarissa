@@ -1,0 +1,505 @@
+<div class="materiais-page">
+
+  <!-- =========================================
+       1. HERO / CABEÇALHO DO LABORATÓRIO
+       ========================================= -->
+  <header class="materiais-hero">
+    <div class="materiais-badge">
+      <span class="badge-icon">🧸</span>
+      <span>Recursos Didáticos & Jogos Pedagógicos</span>
+    </div>
+
+    <h1 class="materiais-title">Laboratório Lúdico de Materiais</h1>
+    
+    <p class="materiais-manifesto">
+      Recursos artesanais, sensoriais e intencionais criados para tocar, sentir, brincar e aprender. 
+      <strong>Escolha um dos recursos abaixo e teste a experiência interativa diretamente na tela!</strong>
+    </p>
+
+    <!-- Seletor dos 4 Materiais / Estações de Teste -->
+    <div class="estacoes-grid">
+      
+      <button 
+        type="button"
+        class="estacao-card" 
+        [class.estacao-ativa]="materialAtivo() === 'emocoes'"
+        (click)="selecionarMaterial('emocoes')">
+        <div class="estacao-icone">🃏</div>
+        <div class="estacao-textos">
+          <span class="estacao-sub">Socioemocional</span>
+          <strong class="estacao-nome">Baralho das Emoções</strong>
+        </div>
+        <span class="estacao-tag">Flip 3D</span>
+      </button>
+
+      <button 
+        type="button"
+        class="estacao-card" 
+        [class.estacao-ativa]="materialAtivo() === 'story-cubes'"
+        (click)="selecionarMaterial('story-cubes')">
+        <div class="estacao-icone">🎲</div>
+        <div class="estacao-textos">
+          <span class="estacao-sub">Imaginação & Fala</span>
+          <strong class="estacao-nome">Dados de Histórias</strong>
+        </div>
+        <span class="estacao-tag">Sorteador</span>
+      </button>
+
+      <button 
+        type="button"
+        class="estacao-card" 
+        [class.estacao-ativa]="materialAtivo() === 'rimas'"
+        (click)="selecionarMaterial('rimas')">
+        <div class="estacao-icone">🧩</div>
+        <div class="estacao-textos">
+          <span class="estacao-sub">Fonologia & Sons</span>
+          <strong class="estacao-nome">Jogo de Rimas</strong>
+        </div>
+        <span class="estacao-tag">Desafio</span>
+      </button>
+
+      <button 
+        type="button"
+        class="estacao-card" 
+        [class.estacao-ativa]="materialAtivo() === 'alfabeto'"
+        (click)="selecionarMaterial('alfabeto')">
+        <div class="estacao-icone">🔤</div>
+        <div class="estacao-textos">
+          <span class="estacao-sub">Texturas & Escrita</span>
+          <strong class="estacao-nome">Alfabetário Tátil</strong>
+        </div>
+        <span class="estacao-tag">Sensorial</span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- =========================================
+       2. ÁREA DO LABORATÓRIO / TESTE INTERATIVO
+       ========================================= -->
+  <section id="laboratorio-interativo" class="laboratorio-area">
+
+    <!-- =======================================
+         EXPERIÊNCIA 1: BARALHO DAS EMOÇÕES
+         ======================================= -->
+    @if (materialAtivo() === 'emocoes') {
+      <div class="recurso-container animar-entrada">
+        
+        <div class="recurso-cabecalho">
+          <div class="recurso-titulos">
+            <span class="recurso-categoria-badge badge-amarelo">Inteligência Socioemocional</span>
+            <h2>Baralho das Emoções & Acolhimento</h2>
+            <p class="recurso-sub">
+              Cartões circulares e acolhedores para rodinhas de conversa, reconhecimento de sentimentos e regulação afetiva.
+            </p>
+          </div>
+
+          <div class="recurso-acoes-topo">
+            <button type="button" class="btn-acao btn-sortear" (click)="sortearCartaEmocao()">
+              ✨ Sortear para a Roda
+            </button>
+            <button type="button" class="btn-acao-secundario" (click)="virarTodasCartas(true)">
+              👁️ Revelar Todas
+            </button>
+            <button type="button" class="btn-acao-secundario" (click)="virarTodasCartas(false)">
+              🙈 Virar p/ Baixo
+            </button>
+          </div>
+        </div>
+
+        <div class="dica-interativa">
+          <span>👆 Toque em qualquer carta para virá-la e descobrir a mediação pedagógica!</span>
+        </div>
+
+        <!-- Grade de Cartas com Flip 3D -->
+        <div class="deck-emocoes-grid">
+          @for (carta of cartasEmocoes(); track carta.id) {
+            <div 
+              class="card-flip-wrapper" 
+              [class.carta-virada]="carta.virada"
+              (click)="virarCarta(carta.id)"
+              tabindex="0"
+              role="button"
+              [attr.aria-label]="'Carta ' + carta.nome">
+              
+              <div class="card-flip-inner">
+                
+                <!-- Verso da Carta (O que a criança vê na mesa) -->
+                <div class="card-face card-back">
+                  <div class="card-back-padrao">
+                    <div class="selo-verso">✨</div>
+                    <span class="texto-verso">Carta dos Sentimentos</span>
+                    <small class="toque-verso">Clique para abrir o coração</small>
+                  </div>
+                </div>
+
+                <!-- Frente da Carta (Revelada com o Conteúdo) -->
+                <div class="card-face card-front" [style.background]="carta.fundoGradiente">
+                  <div class="carta-topo">
+                    <span class="carta-icone-grande">{{ carta.icone }}</span>
+                    <span class="carta-pill" [style.background-color]="carta.corPrimaria">
+                      {{ carta.nome }}
+                    </span>
+                  </div>
+
+                  <div class="carta-corpo">
+                    <div class="bloco-sensacao">
+                      <strong>No corpo sentimos:</strong>
+                      <p>{{ carta.sensacaoCorpo }}</p>
+                    </div>
+
+                    <div class="bloco-pergunta">
+                      <strong>Pergunta para a Criança:</strong>
+                      <p class="pergunta-destaque">“{{ carta.perguntaReflexiva }}”</p>
+                    </div>
+                  </div>
+
+                  <div class="carta-rodape">
+                    <span class="dica-mediacao">💡 <em>{{ carta.mediacaoPedagogica }}</em></span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          }
+        </div>
+
+        <!-- Ficha Técnica e Confecção do Recurso -->
+        <div class="ficha-didatica">
+          <div class="ficha-coluna">
+            <h4>🎯 Foco Pedagógico & BNCC</h4>
+            <p><strong>Campos:</strong> (EI03EO01) Empatia e escuta, (EI03EO04) Comunicação de ideias e sentimentos.</p>
+            <p><strong>Idade recomendada:</strong> 2 a 8 anos (Educação Infantil e Séries Iniciais).</p>
+          </div>
+          
+          <div class="ficha-coluna">
+            <h4>✂️ Como Confeccionar em Casa ou na Escola</h4>
+            <p>Papel cartão kraft reciclado, recortes de revistas ou ilustrações em aquarela, contact fosco para plastificar.</p>
+            <p><strong>Dica de ouro:</strong> Crie um "Pote do Acolhimento" na entrada da sala onde a criança escolhe sua carta logo ao chegar.</p>
+          </div>
+        </div>
+
+      </div>
+    }
+
+    <!-- =======================================
+         EXPERIÊNCIA 2: DADOS DE HISTÓRIAS
+         ======================================= -->
+    @if (materialAtivo() === 'story-cubes') {
+      <div class="recurso-container animar-entrada">
+        
+        <div class="recurso-cabecalho">
+          <div class="recurso-titulos">
+            <span class="recurso-categoria-badge badge-roxo">Oralidade & Criação Coletiva</span>
+            <h2>Dados Mágicos de Histórias (Story Cubes)</h2>
+            <p class="recurso-sub">
+              Cubos lúdicos que combinam personagens, cenários e objetos misteriosos para incentivar a imaginação oral e a produção de narrativas.
+            </p>
+          </div>
+
+          <div class="recurso-acoes-topo">
+            <button 
+              type="button" 
+              class="btn-acao btn-rolar-dados" 
+              [disabled]="dadosRolando()"
+              (click)="rolarDados()">
+              🎲 Rolar os 3 Dados de Histórias!
+            </button>
+          </div>
+        </div>
+
+        <!-- Bandeja de Dados 3D -->
+        <div class="bandeja-dados">
+          
+          <!-- Dado 1: Personagem -->
+          <div class="dado-box" [class.girando]="dadosRolando()">
+            <span class="dado-rotulo">1. Personagem</span>
+            <div class="dado-cubo cubo-personagem">
+              <span class="dado-icone-principal">{{ dadoPersonagem().icone }}</span>
+              <strong class="dado-nome">{{ dadoPersonagem().nome }}</strong>
+              <small class="dado-desc">{{ dadoPersonagem().detalhe }}</small>
+            </div>
+          </div>
+
+          <!-- Sinal de Conexão + -->
+          <div class="dado-conector">+</div>
+
+          <!-- Dado 2: Cenário -->
+          <div class="dado-box" [class.girando]="dadosRolando()">
+            <span class="dado-rotulo">2. Cenário</span>
+            <div class="dado-cubo cubo-cenario">
+              <span class="dado-icone-principal">{{ dadoCenario().icone }}</span>
+              <strong class="dado-nome">{{ dadoCenario().nome }}</strong>
+              <small class="dado-desc">{{ dadoCenario().detalhe }}</small>
+            </div>
+          </div>
+
+          <!-- Sinal de Conexão + -->
+          <div class="dado-conector">+</div>
+
+          <!-- Dado 3: Objeto / Desafio -->
+          <div class="dado-box" [class.girando]="dadosRolando()">
+            <span class="dado-rotulo">3. Objeto Mágico</span>
+            <div class="dado-cubo cubo-objeto">
+              <span class="dado-icone-principal">{{ dadoObjeto().icone }}</span>
+              <strong class="dado-nome">{{ dadoObjeto().nome }}</strong>
+              <small class="dado-desc">{{ dadoObjeto().detalhe }}</small>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Prompt de História Gerado -->
+        <div class="historia-gerada-card">
+          <div class="historia-badge">📜 Ideia para Contação de História #{{ contadorHistorias() }}</div>
+          <p class="historia-frase">
+            “Era uma vez <strong>{{ dadoPersonagem().nome }}</strong> ({{ dadoPersonagem().icone }}), 
+            que vivia <strong>{{ dadoCenario().nome }}</strong> ({{ dadoCenario().icone }}). 
+            Certo dia, encontrou <strong>{{ dadoObjeto().nome }}</strong> ({{ dadoObjeto().icone }}) e tudo mudou!”
+          </p>
+          <span class="historia-convite">👉 Agora é a vez das crianças continuarem: o que aconteceu em seguida?</span>
+        </div>
+
+        <!-- Ficha Didática -->
+        <div class="ficha-didatica">
+          <div class="ficha-coluna">
+            <h4>🎯 Foco Pedagógico & BNCC</h4>
+            <p><strong>Campos:</strong> (EI03EF04) Recontar histórias ouvidas, (EF15LP05) Produção oral de narrativas.</p>
+            <p><strong>Desenvolvimento:</strong> Estrutura de início, meio e fim, ampliação de vocabulário e cooperação.</p>
+          </div>
+          
+          <div class="ficha-coluna">
+            <h4>✂️ Como Confeccionar</h4>
+            <p>Caixinhas de leite tetra pak ou cubos de madeira de demolição, encapados com papel kraft e desenhados com canetinha.</p>
+          </div>
+        </div>
+
+      </div>
+    }
+
+    <!-- =======================================
+         EXPERIÊNCIA 3: PAREAMENTO DE RIMAS
+         ======================================= -->
+    @if (materialAtivo() === 'rimas') {
+      <div class="recurso-container animar-entrada">
+        
+        <div class="recurso-cabecalho">
+          <div class="recurso-titulos">
+            <span class="recurso-categoria-badge badge-verde">Consciência Fonológica</span>
+            <h2>Jogo de Pareamento de Rimas & Sons</h2>
+            <p class="recurso-sub">
+              Desafio de escuta atenta para perceber sons finais iguais nas palavras de forma lúdica e poética.
+            </p>
+          </div>
+
+          <div class="recurso-placar">
+            <span class="placar-icone">⭐</span>
+            <span class="placar-pontos">{{ pontosRima() }} Pontos</span>
+          </div>
+        </div>
+
+        <!-- Tabuleiro do Desafio -->
+        <div class="tabuleiro-rimas">
+          
+          <!-- Card da Palavra Principal -->
+          <div class="card-alvo-rima">
+            <span class="alvo-sub">{{ desafioAtual().categoria }}</span>
+            <div class="alvo-icone">{{ desafioAtual().iconeAlvo }}</div>
+            <h3 class="alvo-palavra">{{ desafioAtual().palavraAlvo }}</h3>
+            <span class="alvo-dica">👂 {{ desafioAtual().dicaFonologica }}</span>
+          </div>
+
+          <!-- Pergunta e Opções -->
+          <div class="painel-opcoes-rima">
+            <h4 class="pergunta-rima">
+              Qual das figuras abaixo <strong>rima</strong> com <span>{{ desafioAtual().palavraAlvo }}</span>?
+            </h4>
+
+            <div class="grade-opcoes-rima">
+              @for (opcao of desafioAtual().opcoes; track opcao.texto) {
+                <button 
+                  type="button"
+                  class="btn-opcao-rima"
+                  [class.opcao-selecionada]="respostaSelecionada() === opcao.texto"
+                  [class.opcao-correta]="respostaSelecionada() === opcao.texto && opcao.correta"
+                  [class.opcao-errada]="respostaSelecionada() === opcao.texto && !opcao.correta"
+                  (click)="testarOpcaoRima(opcao)">
+                  <span class="opcao-icone">{{ opcao.icone }}</span>
+                  <span class="opcao-texto">{{ opcao.texto }}</span>
+                </button>
+              }
+            </div>
+
+            <!-- Feedback da Resposta -->
+            @if (respostaSelecionada() !== null) {
+              <div class="feedback-box" [class.feedback-sucesso]="acertouResposta()" [class.feedback-erro]="!acertouResposta()">
+                @if (acertouResposta()) {
+                  <div class="feedback-conteudo">
+                    <span class="feedback-emoji">🎉</span>
+                    <div>
+                      <strong>Muito bem, você acertou!</strong>
+                      <p>{{ desafioAtual().explicacaoRima }}</p>
+                    </div>
+                  </div>
+                } @else {
+                  <div class="feedback-conteudo">
+                    <span class="feedback-emoji">🤔</span>
+                    <div>
+                      <strong>Quase lá!</strong>
+                      <p>Escute o sonzinho final com atenção: <em>{{ desafioAtual().dicaFonologica }}</em>. Tente outra vez!</p>
+                    </div>
+                  </div>
+                }
+
+                <button type="button" class="btn-proximo-desafio" (click)="proximaRodadaRima()">
+                  Próxima Rodada ➔
+                </button>
+              </div>
+            }
+
+          </div>
+
+        </div>
+
+        <!-- Ficha Didática -->
+        <div class="ficha-didatica">
+          <div class="ficha-coluna">
+            <h4>🎯 Foco Pedagógico & BNCC</h4>
+            <p><strong>Campos:</strong> (EI03EF02) Rimas e aliterações em cantigas e poesias, (EF01LP08) Segmentação fonológica.</p>
+            <p><strong>Impacto:</strong> A consciência fonológica é a ponte mais importante para a alfabetização prazerosa.</p>
+          </div>
+          
+          <div class="ficha-coluna">
+            <h4>✂️ Como Confeccionar</h4>
+            <p>Tampinhas de garrafa PET com figuras circulares coladas no topo (jogo de encaixar ou parear com barbante).</p>
+          </div>
+        </div>
+
+      </div>
+    }
+
+    <!-- =======================================
+         EXPERIÊNCIA 4: ALFABETÁRIO SENSORIAL
+         ======================================= -->
+    @if (materialAtivo() === 'alfabeto') {
+      <div class="recurso-container animar-entrada">
+        
+        <div class="recurso-cabecalho">
+          <div class="recurso-titulos">
+            <span class="recurso-categoria-badge badge-azul">Multissensorial & Escrita</span>
+            <h2>Alfabetário Sensorial de Texturas</h2>
+            <p class="recurso-sub">
+              Letras táteis em relevo inspiradas na pedagogia sensorial Montessori: a mão toca a textura antes de pegar no lápis.
+            </p>
+          </div>
+        </div>
+
+        <!-- Seletor de Letras Disponíveis -->
+        <div class="seletor-letras-bar">
+          <span class="seletor-label">Escolha uma letra para sentir:</span>
+          <div class="botoes-letras">
+            @for (letraObj of letrasSensoriais; track letraObj.letra) {
+              <button 
+                type="button"
+                class="btn-letra"
+                [class.btn-letra-ativa]="letraSensorialAtiva().letra === letraObj.letra"
+                (click)="selecionarLetraSensorial(letraObj)">
+                {{ letraObj.letra }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Quadro da Letra Sensorial -->
+        <div class="quadro-letra-sensorial">
+          
+          <div class="letra-cartao-destaque" [class.animar-traco]="animandoTracado()">
+            <div class="letra-glifo">{{ letraSensorialAtiva().letra }}</div>
+            <span class="letra-palavra-chave">{{ letraSensorialAtiva().palavra }} {{ letraSensorialAtiva().icone }}</span>
+          </div>
+
+          <div class="letra-detalhes-sensoriais">
+            
+            <div class="bloco-textura">
+              <span class="textura-icone">🖐️</span>
+              <div>
+                <strong>Textura Real no Material Físico:</strong>
+                <p>{{ letraSensorialAtiva().texturaReal }}</p>
+              </div>
+            </div>
+
+            <div class="bloco-poesia-traco">
+              <span class="poesia-icone">🌱</span>
+              <div>
+                <strong>Frase Afetiva do Traçado:</strong>
+                <p class="poesia-frase">“{{ letraSensorialAtiva().fraseAfetiva }}”</p>
+              </div>
+            </div>
+
+            <div class="passos-traco-lista">
+              <strong>Como a criança traça com o dedo:</strong>
+              <ul>
+                @for (passo of letraSensorialAtiva().passosTracado; track passo) {
+                  <li>{{ passo }}</li>
+                }
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Ficha Didática -->
+        <div class="ficha-didatica">
+          <div class="ficha-coluna">
+            <h4>🎯 Foco Pedagógico & BNCC</h4>
+            <p><strong>Campos:</strong> (EI03CG05) Coordenação motora fina e preensão, (EI03EF09) Reconhecimento gráfico-fonêmico.</p>
+            <p><strong>Benefício:</strong> Reduz a ansiedade na escrita e ativa a memória muscular pelo tato.</p>
+          </div>
+          
+          <div class="ficha-coluna">
+            <h4>✂️ Como Confeccionar</h4>
+            <p>Placas de papelão grosso com traçado feito em cola branca grossa polvilhada com areia, lixa ou sementes.</p>
+          </div>
+        </div>
+
+      </div>
+    }
+
+  </section>
+
+  <!-- =========================================
+       3. PILARES DA PEDAGOGIA SENSORIAL
+       ========================================= -->
+  <section class="pilares-materiais-section">
+    <div class="pilares-cabecalho">
+      <span class="pilares-sub">Fundamentação Pedagógica</span>
+      <h2>Por que Criamos Nossos Próprios Materiais?</h2>
+      <p>O brinquedo não estruturado e o recurso artesanal abrem portas para a imaginação que brinquedos plásticos e telas não conseguem alcançar.</p>
+    </div>
+
+    <div class="pilares-grid">
+      
+      <div class="pilar-card">
+        <div class="pilar-icone">🖐️</div>
+        <h3>O Toque que Ensina</h3>
+        <p>A criança pequena pensa com as mãos. Tocar em texturas reais da natureza desperta conexões neurais fundamentais para a linguagem e o afeto.</p>
+      </div>
+
+      <div class="pilar-card">
+        <div class="pilar-icone">♻️</div>
+        <h3>Sustentabilidade Afetiva</h3>
+        <p>Ensinamos que caixas de papelão, tampinhas e sementes não são lixo: são tesouros cheios de histórias esperando para nascer.</p>
+      </div>
+
+      <div class="pilar-card">
+        <div class="pilar-icone">🎯</div>
+        <h3>Intencionalidade Pura</h3>
+        <p>Cada jogo e cada cartão possui um objetivo pedagógico claro, respeitando o ritmo próprio e a singularidade de cada criança.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,300 @@
+<section class="historias-container">
+
+  <!-- ==========================================
+       MODO LEITURA COMPLETA DA HISTÓRIA
+       ========================================== -->
+  @if (historiaSelecionada(); as historia) {
+    <article class="leitura-completa">
+      <button type="button" class="btn-voltar" (click)="voltarParaFeed()">
+        ← Voltar para todas as histórias
+      </button>
+
+      @if (historia.imageUrl && (historia.imageUrl.startsWith('data:image') || historia.imageUrl.startsWith('http'))) {
+        <div class="capa-leitura">
+          <img [src]="historia.imageUrl" [alt]="historia.title">
+        </div>
+      }
+
+      <div class="corpo-leitura">
+        <div class="metadados">
+          <span class="badge-categoria">{{ historia.category || 'Geral' }}</span>
+          <span class="data-post">{{ historia.publishedAt | date:'dd/MM/yyyy' }}</span>
+        </div>
+
+        <h1 class="titulo-leitura">{{ historia.title }}</h1>
+
+        @if (historia.subtitle) {
+          <h3 class="subtitulo-leitura">{{ historia.subtitle }}</h3>
+        }
+
+        <div class="conteudo-leitura" [innerHTML]="sanitizarHtml(historia.content)"></div>
+
+        @if (authService.estaAutenticado()) {
+          <footer class="rodape-leitura">
+            <button type="button" class="btn-excluir" (click)="excluirHistoria(historia.id)">
+              🗑️ Excluir esta publicação
+            </button>
+          </footer>
+        }
+      </div>
+    </article>
+  }
+
+  <!-- ==========================================
+       MODO FEED: LISTA DE CARDS HORIZONTAIS
+       ========================================== -->
+  @else {
+    <header class="historias-topo">
+      <div class="topo-texto">
+        <span class="etiqueta">Blog & Narrativas</span>
+        <h1>Minhas <span>Histórias</span></h1>
+        <p>Escolha uma história abaixo para ler na íntegra.</p>
+      </div>
+
+      <div class="topo-acoes">
+        @if (authService.estaAutenticado()) {
+          <button type="button" class="btn-novo-post" (click)="abrirModal()">
+            <span>+ Nova Publicação</span>
+          </button>
+          <button type="button" class="btn-sair" (click)="deslogar()" title="Encerrar sessão">
+            Sair
+          </button>
+        } @else {
+          <button type="button" class="btn-acesso-restrito" (click)="exibirModalLogin.set(true)">
+            🔒 Área da Autora
+          </button>
+        }
+      </div>
+    </header>
+
+    @if (carregando()) {
+      <div class="aviso-status">
+        <div class="spinner"></div>
+        <p>Carregando histórias...</p>
+      </div>
+    } @else if (erroConexao()) {
+      <div class="aviso-status erro">
+        <p>⚠️ Não foi possível conectar ao servidor.</p>
+        <button type="button" class="btn-tentar-novamente" (click)="carregarHistorias()">Tentar Novamente</button>
+      </div>
+    } @else if (historias().length === 0) {
+      <div class="aviso-status">
+        <p>Nenhuma história publicada no momento.</p>
+      </div>
+    } @else {
+      <div class="feed-cards">
+        @for (item of historias(); track item.id) {
+          <article class="card-horizontal" (click)="abrirHistoria(item)">
+
+            <!-- Miniatura da Imagem à Esquerda -->
+            <div class="miniatura-container">
+              @if (item.imageUrl && (item.imageUrl.startsWith('data:image') || item.imageUrl.startsWith('http'))) {
+                <img [src]="item.imageUrl" [alt]="item.title" loading="lazy">
+              } @else {
+                <div class="placeholder-sem-foto">
+                  <span>📖</span>
+                </div>
+              }
+            </div>
+
+            <!-- Informações do Card à Direita -->
+            <div class="info-card">
+              <div class="metadados">
+                <span class="badge-categoria">{{ item.category || 'Geral' }}</span>
+                <span class="data-post">{{ item.publishedAt | date:'dd/MM/yyyy' }}</span>
+              </div>
+
+              <h2 class="titulo-card">{{ item.title }}</h2>
+
+              @if (item.subtitle) {
+                <h4 class="subtitulo-card">{{ item.subtitle }}</h4>
+              }
+
+              <p class="resumo-texto">
+                {{ extrairResumo(item.content) }}
+              </p>
+
+              <div class="rodape-card-feed">
+                <span class="link-ler-mais">Ler história completa →</span>
+
+                @if (authService.estaAutenticado()) {
+                  <button
+                    type="button"
+                    class="btn-excluir-inline"
+                    (click)="excluirHistoria(item.id, $event)">
+                    🗑️ Excluir
+                  </button>
+                }
+              </div>
+            </div>
+
+          </article>
+        }
+      </div>
+    }
+  }
+
+</section>
+
+<!-- ==========================================
+     MODAL DE LOGIN (FIREBASE AUTH)
+     ========================================== -->
+@if (exibirModalLogin()) {
+  <div class="modal-backdrop" (click)="exibirModalLogin.set(false)">
+    <div class="modal-dialog modal-login" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <h3>Acesso da Autora</h3>
+          <p class="modal-sub">Entre para gerenciar e publicar histórias</p>
+        </div>
+        <button class="btn-fechar" (click)="exibirModalLogin.set(false)">&times;</button>
+      </div>
+
+      <form (ngSubmit)="autenticar()" class="modal-body-login">
+        @if (erroLoginMsg()) {
+          <div class="alerta-erro-login">
+            {{ erroLoginMsg() }}
+          </div>
+        }
+
+        <div class="campo-grupo">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            [(ngModel)]="credenciais.email"
+            name="email"
+            placeholder="seunome@exemplo.com"
+            required
+            autofocus>
+        </div>
+
+        <div class="campo-grupo">
+          <label for="senha">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            [(ngModel)]="credenciais.senha"
+            name="senha"
+            placeholder="••••••••"
+            required>
+        </div>
+
+        <div class="modal-acoes-login">
+          <button type="button" class="btn-cancelar" (click)="exibirModalLogin.set(false)">Cancelar</button>
+          <button type="submit" class="btn-publicar" [disabled]="carregandoLogin()">
+            {{ carregandoLogin() ? 'Entrando...' : 'Entrar' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+<!-- ==========================================
+     MODAL DE CRIAÇÃO / EDIÇÃO DE HISTÓRIA
+     ========================================== -->
+@if (exibirModal()) {
+  <div class="modal-backdrop" (click)="fecharModal()">
+    <div class="modal-dialog" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <div>
+          <h3>Nova Publicação</h3>
+          <p class="modal-sub">Escreva e formate sua narrativa</p>
+        </div>
+        <button class="btn-fechar" (click)="fecharModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="campo-grupo">
+          <input
+            type="text"
+            class="input-titulo-grande"
+            [(ngModel)]="novaHistoria.title"
+            placeholder="Título da História...">
+        </div>
+
+        <div class="campo-grupo-duplo">
+          <div class="campo-grupo">
+            <label>Categoria</label>
+            <select [(ngModel)]="novaHistoria.category" class="select-categoria">
+              <option value="Infantil">Infantil</option>
+              <option value="Crônica">Crônica</option>
+              <option value="Poesia">Poesia</option>
+              <option value="Conto">Conto</option>
+              <option value="Reflexão">Reflexão</option>
+            </select>
+          </div>
+
+          <div class="campo-grupo">
+            <label>Subtítulo / Resumo</label>
+            <input
+              type="text"
+              [(ngModel)]="novaHistoria.subtitle"
+              placeholder="Uma breve introdução...">
+          </div>
+        </div>
+
+        <div class="campo-grupo">
+          <label>Capa da História (Opcional)</label>
+          <div class="area-capa" (click)="inputCapa.click()">
+            @if (novaHistoria.imageUrl) {
+              <div class="preview-capa">
+                <img [src]="novaHistoria.imageUrl" alt="Prévia da Capa" />
+                <button type="button" class="btn-remover-capa" (click)="removerCapa($event)">Remover</button>
+              </div>
+            } @else {
+              <div class="placeholder-capa">
+                <span>{{ enviandoImagem() ? 'Enviando imagem...' : '📷 Clique para adicionar imagem de destaque' }}</span>
+              </div>
+            }
+          </div>
+          <input #inputCapa type="file" accept="image/*" style="display: none" (change)="aoSelecionarCapa($event)">
+        </div>
+
+        <div class="campo-grupo">
+          <label>Corpo do Texto</label>
+
+          <div class="editor-container">
+            <div class="barra-ferramentas">
+              <button type="button" (click)="formatar('bold')" title="Negrito"><b>B</b></button>
+              <button type="button" (click)="formatar('italic')" title="Itálico"><i>I</i></button>
+              <button type="button" (click)="formatar('underline')" title="Sublinhado"><u>U</u></button>
+              <span class="divisor-btn"></span>
+              <button type="button" (click)="formatar('formatBlock', '<h2>')" title="Título H2">H2</button>
+              <button type="button" (click)="formatar('formatBlock', '<h3>')" title="Título H3">H3</button>
+              <button type="button" (click)="formatar('formatBlock', '<p>')" title="Parágrafo">P</button>
+              <span class="divisor-btn"></span>
+              <button type="button" (click)="formatar('insertUnorderedList')" title="Lista">• Lista</button>
+              <button type="button" (click)="formatar('formatBlock', '<blockquote>')" title="Citação">“ ”</button>
+              <span class="divisor-btn"></span>
+
+              <button type="button" class="btn-foto-inline" (click)="inputInline.click()" title="Inserir imagem no texto">
+                🖼️ Inserir Foto
+              </button>
+              <input #inputInline type="file" accept="image/*" style="display: none" (change)="inserirImagemNoTexto($event)">
+            </div>
+
+            <div
+              #editorTexto
+              class="area-editavel"
+              contenteditable="true"
+              placeholder="Comece a escrever sua história aqui...">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" class="btn-cancelar" (click)="fecharModal()">Cancelar</button>
+        <button type="button" class="btn-publicar" (click)="publicarHistoria()">
+          ✨ Publicar História
+        </button>
+      </footer>
+
+    </div>
+  </div>
+}

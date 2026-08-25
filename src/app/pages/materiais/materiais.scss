@@ -1,0 +1,1123 @@
+:host {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.materiais-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+  box-sizing: border-box;
+  color: #38302A;
+}
+
+/* =========================================
+   1. HERO / CABEÇALHO DO LABORATÓRIO
+   ========================================= */
+.materiais-hero {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 3rem;
+  animation: surgirSuave 0.6s ease-out;
+
+  .materiais-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #FFF3DD;
+    color: #92580E;
+    border: 1px solid #F5D399;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 8px rgba(146, 88, 14, 0.08);
+
+    .badge-icon {
+      font-size: 1.1rem;
+    }
+  }
+
+  .materiais-title {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: #382414;
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .materiais-manifesto {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: #5C4F44;
+    margin: 0 auto 2.5rem;
+
+    strong {
+      color: #92580E;
+      font-weight: 700;
+    }
+  }
+}
+
+/* Estações / Seletor de 4 Materiais */
+.estacoes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.estacao-card {
+  background: #FFFFFF;
+  border: 2px solid #E5DAC9;
+  border-radius: 18px;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: left;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(80, 60, 40, 0.04);
+  font-family: inherit;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: #C28B32;
+    box-shadow: 0 10px 24px rgba(146, 88, 14, 0.12);
+
+    .estacao-icone {
+      transform: scale(1.15) rotate(4deg);
+    }
+  }
+
+  &.estacao-ativa {
+    border-color: #92580E;
+    background: #FFFDF9;
+    box-shadow: 0 0 0 3px rgba(146, 88, 14, 0.2), 0 8px 20px rgba(146, 88, 14, 0.15);
+
+    .estacao-nome {
+      color: #92580E;
+    }
+
+    .estacao-tag {
+      background: #92580E;
+      color: #FFFFFF;
+    }
+  }
+
+  .estacao-icone {
+    font-size: 2.2rem;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .estacao-textos {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .estacao-sub {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8C7C6D;
+    }
+
+    .estacao-nome {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #2D241E;
+      line-height: 1.25;
+      margin-top: 2px;
+    }
+  }
+
+  .estacao-tag {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: #EFE6D8;
+    color: #5C4D3E;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+  }
+}
+
+/* =========================================
+   2. ÁREA DO LABORATÓRIO / CONTAINER GERAL
+   ========================================= */
+.laboratorio-area {
+  margin-bottom: 4.5rem;
+  scroll-margin-top: 2rem;
+}
+
+.recurso-container {
+  background: #FFFFFF;
+  border: 3px solid #E5DAC9;
+  border-radius: 28px;
+  padding: 2.5rem;
+  box-shadow: 0 16px 40px rgba(70, 50, 30, 0.08);
+
+  @media (max-width: 640px) {
+    padding: 1.5rem 1rem;
+    border-radius: 20px;
+  }
+}
+
+.recurso-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px dashed #EAE0D2;
+
+  .recurso-titulos {
+    max-width: 680px;
+
+    .recurso-categoria-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.8rem;
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+
+      &.badge-amarelo { background: #FFF1D6; color: #92580E; }
+      &.badge-roxo { background: #F3E8FF; color: #6B21A8; }
+      &.badge-verde { background: #E2F5E8; color: #1E6B37; }
+      &.badge-azul { background: #E0F2FE; color: #0369A1; }
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 800;
+      color: #2D221A;
+      margin: 0 0 0.5rem;
+      line-height: 1.25;
+    }
+
+    .recurso-sub {
+      font-size: 1rem;
+      color: #635548;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+
+  .recurso-acoes-topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+  }
+}
+
+.btn-acao {
+  background: #92580E;
+  color: #FFFFFF;
+  border: none;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.65rem 1.3rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 12px rgba(146, 88, 14, 0.25);
+
+  &:hover {
+    background: #784708;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(146, 88, 14, 0.35);
+  }
+
+  &.btn-rolar-dados {
+    background: #6B21A8;
+    box-shadow: 0 4px 12px rgba(107, 33, 168, 0.25);
+
+    &:hover {
+      background: #581C87;
+      box-shadow: 0 8px 18px rgba(107, 33, 168, 0.35);
+    }
+  }
+}
+
+.btn-acao-secundario {
+  background: #F4EDE2;
+  border: 1px solid #D8C8B5;
+  color: #554536;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #E8DDCE;
+    color: #2D221A;
+  }
+}
+
+.dica-interativa {
+  background: #FAF6F0;
+  border-left: 4px solid #C28B32;
+  padding: 0.75rem 1.1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #5C4731;
+}
+
+/* =========================================
+   RECURSO 1: BARALHO FLIP 3D
+   ========================================= */
+.deck-emocoes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.card-flip-wrapper {
+  height: 460px;
+  perspective: 1000px;
+  cursor: pointer;
+  outline: none;
+
+  &:hover .card-face {
+    box-shadow: 0 16px 36px rgba(80, 55, 30, 0.18);
+  }
+
+  &.carta-virada .card-flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.card-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 8px 24px rgba(80, 55, 30, 0.08);
+  border: 2px solid #E2D5C3;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Verso da Carta */
+.card-back {
+  background: #FFFDF9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+
+  .card-back-padrao {
+    border: 2px dashed #D6C2A8;
+    border-radius: 14px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem 1rem;
+    box-sizing: border-box;
+    text-align: center;
+    background: radial-gradient(circle, #FFF8ED 0%, #F5E8D3 100%);
+
+    .selo-verso {
+      font-size: 3.5rem;
+      margin-bottom: 0.75rem;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    }
+
+    .texto-verso {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #4A3A2A;
+      margin-bottom: 0.4rem;
+    }
+
+    .toque-verso {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #92580E;
+    }
+  }
+}
+
+/* Frente da Carta */
+.card-front {
+  transform: rotateY(180deg);
+  padding: 1.2rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .carta-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+
+    .carta-icone-grande {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+    }
+
+    .carta-pill {
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 0.3rem 0.8rem;
+      border-radius: 8px;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  .carta-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    flex-grow: 1;
+
+    .bloco-sensacao, .bloco-pergunta {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+
+      strong {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        color: #7A6958;
+        display: block;
+        margin-bottom: 2px;
+        letter-spacing: 0.03em;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #2D221A;
+        line-height: 1.35;
+      }
+
+      .pergunta-destaque {
+        font-weight: 700;
+        color: #241D17;
+        font-style: italic;
+      }
+    }
+  }
+
+  .carta-rodape {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    margin-top: 0.5rem;
+
+    .dica-mediacao {
+      display: block;
+      font-size: 0.8rem;
+      color: #4A3A2A;
+      line-height: 1.4;
+      font-style: normal;
+
+      em {
+        font-style: normal;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+/* =========================================
+   RECURSO 2: STORY CUBES
+   ========================================= */
+.bandeja-dados {
+  background: #FDF9F2;
+  border: 2px solid #E5DAC9;
+  border-radius: 24px;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .dado-conector {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #C2B3A0;
+    user-select: none;
+
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+}
+
+.dado-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  width: 190px;
+
+  &.girando .dado-cubo {
+    animation: rolarDado3D 0.35s infinite ease-in-out;
+  }
+
+  .dado-rotulo {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #8C7864;
+    letter-spacing: 0.05em;
+  }
+
+  .dado-cubo {
+    width: 100%;
+    height: 190px;
+    background: #FFFFFF;
+    border: 3px solid #DECBB5;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 10px 24px rgba(70, 50, 30, 0.08);
+    transition: all 0.2s ease;
+
+    .dado-icone-principal {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    }
+
+    .dado-nome {
+      font-size: 0.98rem;
+      color: #2D221A;
+      margin-bottom: 0.25rem;
+    }
+
+    .dado-desc {
+      font-size: 0.78rem;
+      color: #706050;
+      line-height: 1.3;
+    }
+
+    &.cubo-personagem { border-color: #D3A15C; }
+    &.cubo-cenario { border-color: #4A8F6A; }
+    &.cubo-objeto { border-color: #6B21A8; }
+  }
+}
+
+.historia-gerada-card {
+  background: #FFFDF9;
+  border: 2px dashed #DECBB5;
+  border-radius: 18px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+
+  .historia-badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #6B21A8;
+    background: #F3E8FF;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 0.85rem;
+  }
+
+  .historia-frase {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #33271D;
+    margin: 0 0 0.85rem;
+
+    strong {
+      color: #6B21A8;
+    }
+  }
+
+  .historia-convite {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #92580E;
+  }
+}
+
+/* =========================================
+   RECURSO 3: JOGO DE RIMAS
+   ========================================= */
+.recurso-placar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FEF3C7;
+  border: 1px solid #FCD34D;
+  padding: 0.45rem 1rem;
+  border-radius: 12px;
+  font-weight: 800;
+  color: #92400E;
+  font-size: 1rem;
+
+  .placar-icone {
+    font-size: 1.3rem;
+  }
+}
+
+.tabuleiro-rimas {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-alvo-rima {
+  background: #F2F9F4;
+  border: 3px solid #B8E2C4;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+
+  .alvo-sub {
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #2D6A3F;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .alvo-icone {
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
+  }
+
+  .alvo-palavra {
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: #1E4620;
+    margin: 0 0 0.5rem;
+  }
+
+  .alvo-dica {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #40774D;
+    background: #FFFFFF;
+    padding: 0.35rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #D2EED9;
+  }
+}
+
+.painel-opcoes-rima {
+  display: flex;
+  flex-direction: column;
+
+  .pergunta-rima {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #33271D;
+    margin: 0 0 1.25rem;
+
+    span {
+      color: #1E6B37;
+      font-weight: 900;
+    }
+  }
+
+  .grade-opcoes-rima {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .btn-opcao-rima {
+    background: #FAF7F2;
+    border: 2px solid #E0D3C1;
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #382D23;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    .opcao-icone {
+      font-size: 2rem;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: #1E6B37;
+      background: #FFFFFF;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    &.opcao-correta {
+      background: #D1FAE5 !important;
+      border-color: #059669 !important;
+      color: #065F46 !important;
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.25);
+    }
+
+    &.opcao-errada {
+      background: #FEE2E2 !important;
+      border-color: #DC2626 !important;
+      color: #991B1B !important;
+      animation: sacudirErro 0.35s ease;
+    }
+  }
+
+  .feedback-box {
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    animation: surgirSuave 0.3s ease-out;
+
+    .feedback-conteudo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .feedback-emoji {
+        font-size: 2.2rem;
+      }
+
+      strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 2px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+    }
+
+    &.feedback-sucesso {
+      background: #ECFDF5;
+      border: 2px solid #A7F3D0;
+      color: #065F46;
+    }
+
+    &.feedback-erro {
+      background: #FFFBEB;
+      border: 2px solid #FDE68A;
+      color: #92400E;
+    }
+
+    .btn-proximo-desafio {
+      background: #1E6B37;
+      color: #FFFFFF;
+      border: none;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #144925;
+        transform: translateX(2px);
+      }
+    }
+  }
+}
+
+/* =========================================
+   RECURSO 4: ALFABETÁRIO SENSORIAL
+   ========================================= */
+.seletor-letras-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  .seletor-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #695B4E;
+  }
+
+  .botoes-letras {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .btn-letra {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #FAF6F0;
+    border: 2px solid #E0D3C1;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #4A3A2A;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-family: inherit;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: #0369A1;
+      color: #0369A1;
+    }
+
+    &.btn-letra-ativa {
+      background: #0369A1;
+      color: #FFFFFF;
+      border-color: #0369A1;
+      box-shadow: 0 4px 12px rgba(3, 105, 161, 0.3);
+    }
+  }
+}
+
+.quadro-letra-sensorial {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.letra-cartao-destaque {
+  background: linear-gradient(135deg, #F9F5EC 0%, #E8DBC6 100%);
+  border: 4px solid #D6C2A5;
+  border-radius: 24px;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06), 0 10px 24px rgba(70, 50, 30, 0.1);
+
+  &.animar-traco {
+    animation: pulsarLetra 0.75s ease-out;
+  }
+
+  .letra-glifo {
+    font-size: 7.5rem;
+    font-weight: 900;
+    color: #4A3521;
+    line-height: 1;
+    text-shadow: 2px 2px 0 #FFF, 4px 4px 0 rgba(74, 53, 33, 0.2);
+    margin-bottom: 0.5rem;
+  }
+
+  .letra-palavra-chave {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #2D221A;
+    background: #FFFFFF;
+    padding: 0.4rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #DFCDBD;
+  }
+}
+
+.letra-detalhes-sensoriais {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  .bloco-textura, .bloco-poesia-traco {
+    background: #FAF7F2;
+    border: 1px solid #E5D9C8;
+    border-radius: 16px;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+
+    .textura-icone, .poesia-icone {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    strong {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: #7A6958;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #33271D;
+      line-height: 1.5;
+    }
+
+    .poesia-frase {
+      font-style: italic;
+      font-weight: 700;
+      color: #0369A1;
+    }
+  }
+
+  .passos-traco-lista {
+    background: #FFFFFF;
+    border: 1.5px dashed #D8C7B2;
+    border-radius: 16px;
+    padding: 1.1rem 1.25rem;
+
+    strong {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: #7A6958;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+
+      li {
+        font-size: 0.92rem;
+        color: #4A3B2F;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+/* =========================================
+   FICHA TÉCNICA DIDÁTICA COMPARTILHADA
+   ========================================= */
+.ficha-didatica {
+  background: #FDF9F2;
+  border: 1.5px solid #E5DAC9;
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+
+  .ficha-coluna {
+    h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #382414;
+      margin: 0 0 0.5rem;
+    }
+
+    p {
+      margin: 0 0 0.4rem;
+      font-size: 0.88rem;
+      color: #5C4D3E;
+      line-height: 1.5;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      strong {
+        color: #2D221A;
+      }
+    }
+  }
+}
+
+/* =========================================
+   3. PILARES DA PEDAGOGIA SENSORIAL
+   ========================================= */
+.pilares-materiais-section {
+  background: #FAF6F0;
+  border: 2px solid #E2D6C5;
+  border-radius: 28px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(60, 45, 30, 0.06);
+
+  @media (max-width: 640px) {
+    padding: 2rem 1.25rem;
+    border-radius: 20px;
+  }
+}
+
+.pilares-cabecalho {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 2.5rem;
+
+  .pilares-sub {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #92580E;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    color: #2A211B;
+    margin: 0.35rem 0 0.6rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #5E5246;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.pilares-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.pilar-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid #E8DDD0;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  .pilar-icone {
+    font-size: 2.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #2D221A;
+    margin: 0 0 0.6rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #635446;
+    line-height: 1.55;
+    margin: 0;
+  }
+}
+
+/* =========================================
+   ANIMAÇÕES
+   ========================================= */
+@keyframes surgirSuave {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animar-entrada {
+  animation: surgirSuave 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes rolarDado3D {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  25% { transform: translateY(-12px) rotate(-15deg) scale(1.08); }
+  50% { transform: translateY(6px) rotate(12deg) scale(0.95); }
+  75% { transform: translateY(-8px) rotate(-8deg) scale(1.04); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+@keyframes sacudirErro {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+@keyframes pulsarLetra {
+  0% { transform: scale(0.92); opacity: 0.7; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}

@@ -13,6 +13,7 @@ yarn-error.log
 
 # IDEs and editors
 .idea/
+*.iml
 .project
 .classpath
 .c9/
@@ -42,3 +43,11 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+src/environments/environment.local.ts
+src/environments/environment.development.local.ts
+src/environments/environment.production.local.ts

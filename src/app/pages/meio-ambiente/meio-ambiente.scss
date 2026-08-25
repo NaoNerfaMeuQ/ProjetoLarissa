@@ -1,0 +1,1027 @@
+:host {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.meio-ambiente-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+  box-sizing: border-box;
+  color: #38302A;
+}
+
+/* =========================================
+   1. HERO / CABEÇALHO DA BANCADA
+   ========================================= */
+.eco-hero {
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto 3rem;
+  animation: surgirSuave 0.6s ease-out;
+
+  .eco-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #E5EFE4;
+    color: #2D582F;
+    border: 1px solid #C4DEC2;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 8px rgba(45, 88, 47, 0.08);
+
+    .badge-icon {
+      font-size: 1.1rem;
+    }
+  }
+
+  .eco-title {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: #243D26;
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .eco-manifesto {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: #554A41;
+    margin: 0 auto 2rem;
+
+    strong {
+      color: #2D582F;
+      font-weight: 700;
+    }
+  }
+}
+
+/* Filtros de Categoria */
+.filtros-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+
+  .filtro-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #7A6C60;
+  }
+
+  .filtros-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .pill-btn {
+    background: #FAF6F0;
+    border: 1.5px solid #DDD1C1;
+    color: #554A41;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+
+    &:hover {
+      background: #EBE1D2;
+      color: #2D582F;
+      transform: translateY(-1px);
+    }
+
+    &.pill-ativo {
+      background: #2D582F;
+      color: #FFFFFF;
+      border-color: #2D582F;
+      box-shadow: 0 4px 12px rgba(45, 88, 47, 0.25);
+    }
+  }
+}
+
+/* =========================================
+   2. A BANCADA INTERATIVA (MESA DE TRABALHO)
+   ========================================= */
+.mesa-bancada-section {
+  margin-bottom: 4rem;
+  scroll-margin-top: 2rem;
+}
+
+.mesa-madeira {
+  background: linear-gradient(145deg, #F9F4EB 0%, #EFE4D2 100%);
+  border: 3px solid #D6C2A5;
+  border-radius: 28px;
+  padding: 2rem 2rem 2.5rem;
+  box-shadow: 
+    0 16px 40px rgba(74, 57, 36, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 6px rgba(110, 85, 52, 0.1);
+  position: relative;
+
+  @media (max-width: 640px) {
+    padding: 1.25rem 1rem 1.75rem;
+    border-radius: 20px;
+  }
+}
+
+.mesa-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px dashed #D6C2A5;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  .mesa-rotulo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #4A3A2A;
+
+    .rotulo-icone {
+      font-size: 1.3rem;
+    }
+  }
+
+  .mesa-dica {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #6E5B47;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0.35rem 0.85rem;
+    border-radius: 12px;
+    border: 1px solid #D8C7B0;
+  }
+}
+
+/* Grade dos Objetos na Mesa */
+.objetos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.75rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.objeto-item {
+  background: #FFFFFF;
+  border: 2px solid #E5D9C8;
+  border-radius: 20px;
+  padding: 1.25rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 20px rgba(90, 70, 48, 0.06);
+  outline: none;
+
+  &:hover, &:focus-visible {
+    transform: translateY(-6px) scale(1.02);
+    border-color: #38663A;
+    box-shadow: 0 16px 32px rgba(45, 88, 47, 0.18);
+
+    .objeto-icone-gigante {
+      transform: scale(1.15) rotate(4deg);
+    }
+
+    .cta-seta {
+      transform: translateX(4px);
+    }
+  }
+
+  &.selecionado {
+    border-color: #2D582F;
+    box-shadow: 0 0 0 4px rgba(45, 88, 47, 0.2), 0 12px 28px rgba(45, 88, 47, 0.2);
+    background: #FCFAF6;
+  }
+}
+
+/* Fita Adesiva Decorativa */
+.washi-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 90px;
+  height: 22px;
+  background: rgba(224, 210, 188, 0.75);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  border-left: 2px dashed rgba(180, 160, 130, 0.4);
+  border-right: 2px dashed rgba(180, 160, 130, 0.4);
+  z-index: 2;
+}
+
+/* Vitrine do Objeto */
+.objeto-vitrine {
+  height: 140px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  .objeto-icone-gigante {
+    font-size: 4rem;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .objeto-badge-categoria {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 8px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.objeto-etiqueta {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .objeto-nome-curto {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #8C7A6B;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.25rem;
+  }
+
+  .objeto-titulo {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #2D241E;
+    margin: 0 0 0.4rem;
+    line-height: 1.3;
+  }
+
+  .objeto-subtitulo {
+    font-size: 0.88rem;
+    color: #63574C;
+    line-height: 1.45;
+    margin: 0 0 1rem;
+    flex-grow: 1;
+  }
+
+  .objeto-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px solid #F0E6D8;
+    color: #2D582F;
+    font-size: 0.88rem;
+    font-weight: 700;
+
+    .cta-seta {
+      transition: transform 0.2s ease;
+    }
+  }
+}
+
+/* =========================================
+   3. A PRANCHETA DE CAMPO (MODAL / EXPANSÃO)
+   ========================================= */
+.prancheta-container {
+  margin-bottom: 4rem;
+  scroll-margin-top: 2rem;
+  animation: desdobrarPrancheta 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prancheta-madeira {
+  background: #A67C52;
+  background: linear-gradient(180deg, #9C7248 0%, #835C33 100%);
+  border-radius: 28px;
+  padding: 3.5rem 1.5rem 2rem;
+  box-shadow: 
+    0 24px 50px rgba(54, 38, 20, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+
+  @media (max-width: 640px) {
+    padding: 3rem 0.75rem 1.5rem;
+    border-radius: 20px;
+  }
+}
+
+/* Clipe Metálico */
+.clipe-metalico {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 38px;
+  background: linear-gradient(180deg, #D6D6D6 0%, #9E9E9E 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #757575;
+
+  .clipe-furo {
+    width: 18px;
+    height: 18px;
+    background: #616161;
+    border-radius: 50%;
+    border: 2px solid #BDBDBD;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Folha de Papel de Campo */
+.folha-campo {
+  background: #FAF8F5;
+  border-radius: 18px;
+  padding: 2.25rem 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  color: #332B25;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+.folha-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E8DECE;
+
+  .folha-meta-topo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .folha-tag-categoria {
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+  }
+
+  .folha-codigo-bncc {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #6E5F52;
+    background: #EFE8DC;
+    padding: 0.3rem 0.75rem;
+    border-radius: 8px;
+  }
+
+  .btn-fechar-prancheta {
+    background: #EFE8DC;
+    border: 1px solid #DACABA;
+    color: #4A3E33;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.4rem 0.9rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+
+    &:hover {
+      background: #C46D4E;
+      color: #FFFFFF;
+      border-color: #C46D4E;
+    }
+  }
+}
+
+.folha-cabecalho-projeto {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .icone-destaque-projeto {
+    font-size: 3.5rem;
+    background: #F2ECE0;
+    border: 2px solid #DFD2BE;
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .titulos-projeto {
+    h2 {
+      font-size: clamp(1.4rem, 3vw, 1.85rem);
+      font-weight: 800;
+      color: #241D17;
+      margin: 0 0 0.4rem;
+      line-height: 1.25;
+    }
+
+    .folha-subtitulo {
+      font-size: 1.05rem;
+      color: #5C4F44;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+}
+
+/* Ficha Técnica */
+.ficha-tecnica-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  .ficha-card {
+    background: #F4EFE6;
+    border: 1px solid #DFD4C4;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+
+    .ficha-icone {
+      font-size: 1.6rem;
+    }
+
+    .ficha-info {
+      display: flex;
+      flex-direction: column;
+
+      .ficha-rotulo {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #7E6F62;
+      }
+
+      .ficha-valor {
+        font-size: 0.9rem;
+        color: #2D241E;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+/* Banner Impacto */
+.banner-impacto {
+  background: #E8F3E9;
+  border-left: 4px solid #38663A;
+  border-radius: 8px;
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+
+  .impacto-estrela {
+    font-size: 1.3rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #204723;
+  }
+}
+
+/* Abas da Prancheta */
+.prancheta-abas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-bottom: 2px solid #E5DAC9;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+
+  .aba-btn {
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #695B4E;
+    padding: 0.6rem 1.1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #EFE7DA;
+      color: #2D582F;
+    }
+
+    &.aba-ativa {
+      background: #2D582F;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(45, 88, 47, 0.2);
+    }
+  }
+}
+
+/* Conteúdos das Abas */
+.aba-conteudo {
+  animation: surgirSuave 0.35s ease-out;
+  min-height: 220px;
+}
+
+/* Aba Diário */
+.aba-diario {
+  position: relative;
+
+  .aspas-decorativas {
+    position: absolute;
+    top: -25px;
+    left: -10px;
+    font-size: 5rem;
+    color: #E2D3BE;
+    font-family: serif;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .texto-relato {
+    font-size: 1.08rem;
+    line-height: 1.8;
+    color: #40362E;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2rem;
+    white-space: pre-line;
+  }
+
+  .nota-pedagogica {
+    background: #FFF8EB;
+    border: 1.5px solid #F0D9B5;
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+
+    h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #8C531B;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #593C1E;
+      font-style: italic;
+    }
+  }
+}
+
+/* Aba Passos */
+.aba-passos {
+  .materiais-box {
+    background: #F4EFE6;
+    border: 1px solid #DFD4C4;
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+
+    .materiais-titulo {
+      margin: 0 0 0.85rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #382D23;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .materiais-lista {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.5rem 1.5rem;
+
+      li {
+        font-size: 0.95rem;
+        color: #4A3E33;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .passos-timeline {
+    .passos-titulo {
+      margin: 0 0 1.25rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #382D23;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .passos-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .passo-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      background: #FFFFFF;
+      border: 1px solid #E5DAC9;
+      border-radius: 14px;
+      padding: 1.1rem 1.25rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+      .passo-numero {
+        width: 36px;
+        height: 36px;
+        background: #2D582F;
+        color: #FFFFFF;
+        font-size: 1.1rem;
+        font-weight: 800;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .passo-detalhes {
+        h5 {
+          margin: 0 0 0.35rem;
+          font-size: 1rem;
+          font-weight: 800;
+          color: #2D241E;
+        }
+
+        p {
+          margin: 0;
+          font-size: 0.92rem;
+          color: #554A41;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+}
+
+/* Aba Aprendizados */
+.aba-aprendizados {
+  .aprendizados-titulo {
+    margin: 0 0 1.25rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #382D23;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .aprendizados-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .aprendizado-item {
+    background: #F4EFE6;
+    border: 1px solid #DFD4C4;
+    border-radius: 12px;
+    padding: 1rem 1.15rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+
+    .aprendizado-icone {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: #382D23;
+      font-weight: 600;
+    }
+  }
+
+  .alinhamento-bncc {
+    background: #E8F0F5;
+    border-left: 4px solid #2B6D88;
+    border-radius: 8px;
+    padding: 1.1rem 1.3rem;
+
+    h4 {
+      margin: 0 0 0.4rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #1A4657;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #274D5E;
+    }
+  }
+}
+
+/* Aba Polaroids */
+.aba-galeria {
+  .polaroids-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem 1.5rem;
+    padding: 1.5rem 0.5rem;
+    justify-items: center;
+  }
+
+  .polaroid-card {
+    background: #FFFFFF;
+    padding: 0.85rem 0.85rem 1.25rem;
+    border-radius: 4px;
+    box-shadow: 0 10px 24px rgba(60, 45, 30, 0.15);
+    border: 1px solid #E2D7C7;
+    width: 220px;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    &:hover {
+      transform: scale(1.06) rotate(0deg) !important;
+      z-index: 5;
+      box-shadow: 0 16px 36px rgba(45, 30, 15, 0.22);
+    }
+
+    .polaroid-fita {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 18px;
+      background: rgba(220, 205, 185, 0.7);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      z-index: 2;
+    }
+
+    .polaroid-foto-quadro {
+      height: 160px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.85rem;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+
+      .polaroid-icone-central {
+        font-size: 3.5rem;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+      }
+    }
+
+    .polaroid-legenda {
+      strong {
+        display: block;
+        font-size: 0.88rem;
+        color: #2D241E;
+        margin-bottom: 0.25rem;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.78rem;
+        color: #6E5F52;
+        line-height: 1.35;
+      }
+    }
+  }
+}
+
+/* Rodapé da Prancheta */
+.folha-rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #E8DECE;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+
+  .btn-navegacao {
+    background: #EFE8DC;
+    border: 1.5px solid #D8C8B5;
+    color: #4A3E33;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.6rem 1.25rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+
+    &:hover {
+      background: #E0D4C3;
+      transform: translateY(-1px);
+    }
+
+    &.btn-primario {
+      background: #2D582F;
+      color: #FFFFFF;
+      border-color: #2D582F;
+
+      &:hover {
+        background: #234625;
+        box-shadow: 0 4px 12px rgba(45, 88, 47, 0.3);
+      }
+    }
+  }
+}
+
+/* =========================================
+   4. MURAL DE SEMENTES & IMPACTÔMETRO
+   ========================================= */
+.mural-impacto-section {
+  background: #FAF6F0;
+  border: 2px solid #E2D6C5;
+  border-radius: 28px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(60, 45, 30, 0.06);
+
+  @media (max-width: 640px) {
+    padding: 2rem 1.25rem;
+    border-radius: 20px;
+  }
+}
+
+.mural-cabecalho {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+
+  .mural-sub {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #7A6C5F;
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    color: #2A211B;
+    margin: 0.35rem 0 0.6rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #5E5246;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.impactometros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.impacto-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 2px solid transparent;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  .impacto-icone {
+    font-size: 2.75rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .impacto-numero {
+    font-size: 2.25rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .impacto-titulo {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #2D241E;
+    margin-bottom: 0.5rem;
+  }
+
+  .impacto-desc {
+    font-size: 0.85rem;
+    color: #6B5D50;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  &.card-verde {
+    border-color: #D3E8D5;
+    .impacto-numero { color: #2D582F; }
+  }
+
+  &.card-terracota {
+    border-color: #F6D6CC;
+    .impacto-numero { color: #C46D4E; }
+  }
+
+  &.card-amarelo {
+    border-color: #F8E8C9;
+    .impacto-numero { color: #C28B32; }
+  }
+
+  &.card-azul {
+    border-color: #CCE7F0;
+    .impacto-numero { color: #2D6E87; }
+  }
+}
+
+/* =========================================
+   ANIMAÇÕES
+   ========================================= */
+@keyframes surgirSuave {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes desdobrarPrancheta {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

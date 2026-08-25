@@ -1,0 +1,50 @@
+@if (mostrarSplash) {
+  <div class="splash-screen">
+    <!-- Primeira Tela -->
+    <div class="splash-grupo grupo-1">
+      <h1 class="splash-text">Olá! Seja bem-vindo(a).</h1>
+      <img src="assets/pigeon.svg" alt="Pombo acenando" class="splash-img">
+    </div>
+
+    <!-- Segunda Tela -->
+    <div class="splash-grupo grupo-2">
+      <h1 class="splash-text">Este é um pequeno resumo meu</h1>
+      <img src="assets/Bad%20Cat.svg" alt="Gato" class="splash-img">
+    </div>
+  </div>
+}
+
+<section class="home-hub">
+  <div class="boas-vindas">
+    <h1 [class.animacao-atrasada]="mostrarSplash">Portfólio Pedagógico & Editorial</h1>
+    <p class="tagline" [class.animacao-atrasada]="mostrarSplash">Explorando a intersecção entre educação, literatura e natureza.</p>
+  </div>
+
+  <div class="grade-projetos" [class.animacao-atrasada]="mostrarSplash">
+
+    <a routerLink="/projetos-editoriais" class="card-hub">
+      <div class="card-icone">📖</div>
+      <h3>Projetos Editoriais</h3>
+      <p>Histórias e livros criados para acolher e ensinar.</p>
+    </a>
+
+    <a routerLink="/meio-ambiente" class="card-hub">
+      <div class="card-icone">🌱</div>
+      <h3>Meio Ambiente & Sustentabilidade</h3>
+      <p>Projetos voltados para a conscientização ecológica.</p>
+    </a>
+
+    <a routerLink="/materiais" class="card-hub">
+      <div class="card-icone">✂️</div>
+      <h3>Exemplos de Materiais</h3>
+      <p>Recursos didáticos fundamentados na prática pedagógica.</p>
+    </a>
+
+    <a routerLink="/minhas-historias" class="card-hub">
+      <div class="card-icone">✒️</div>
+      <h3>Minhas Histórias</h3>
+      <p>Contos, crônicas e narrativas autorais.</p>
+    </a>
+
+  </div>
+</section>

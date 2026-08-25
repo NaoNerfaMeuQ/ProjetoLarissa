@@ -1,0 +1,112 @@
+<section class="projetos-container">
+  
+  <div class="projetos-cabecalho">
+    <span class="projetos-badge">📖 Literatura & Narrativas Autorais</span>
+    <h2>Projetos Editoriais</h2>
+    <p class="projetos-subtitulo">
+      Livros e materiais ilustrados criados para acolher, encantar e ensinar. 
+      <strong>Passe o mouse sobre o livro para abri-lo ou clique para virar a página.</strong>
+    </p>
+  </div>
+
+  <div class="leitor-mesa-palco">
+
+    <!-- Seta Anterior -->
+    <button 
+      type="button"
+      class="seta-nav seta-anterior" 
+      [class.seta-oculta-aberto]="livroAberto()"
+      (click)="livroAnterior()" 
+      [disabled]="livroAtual() === 0 || !!animacaoLivro() || livroAberto()"
+      title="Livro anterior">
+      &#10094;
+    </button>
+
+    <!-- O Livro 3D na Mesa -->
+    <div class="book-viewport">
+      <div 
+        class="book" 
+        [ngClass]="animacaoLivro() || ''"
+        (mouseenter)="livroAberto.set(true)"
+        (mouseleave)="livroAberto.set(false)"
+        (click)="avancarPagina()"
+        role="button"
+        tabindex="0"
+        aria-label="Livro interativo">
+
+        <!-- Parte interna (Páginas do Livro) -->
+        <div class="book-inside">
+          <div class="livro-conteudo" [class.revelando-pagina]="virandoPagina()">
+            <div class="marca-dagua-pagina">📖</div>
+            <p>{{ projetos[livroAtual()].paginas[paginaAtual()] }}</p>
+          </div>
+
+          <div class="livro-footer">
+            <span class="dica-clique">Toque para virar a página ➔</span>
+            <span class="paginacao">
+              Página {{ paginaAtual() + 1 }} de {{ projetos[livroAtual()].paginas.length }}
+            </span>
+          </div>
+
+          <!-- Folha Animada que Vira em 3D -->
+          @if (virandoPagina()) {
+            <div class="folha-virando-overlay">
+              <div class="livro-conteudo">
+                <div class="marca-dagua-pagina">📖</div>
+                <p>{{ projetos[livroAtual()].paginas[paginaAnterior()] }}</p>
+              </div>
+              <div class="livro-footer">
+                <span class="dica-clique">Virando folha...</span>
+                <span class="paginacao">
+                  Página {{ paginaAnterior() + 1 }} de {{ projetos[livroAtual()].paginas.length }}
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Capa do Livro (O que aparece antes do hover) -->
+        <div class="cover" [style.background-color]="projetos[livroAtual()].corCapa || '#366E4B'">
+          <div class="selo-editorial">✨ Obra Autoral</div>
+          <h3>{{ projetos[livroAtual()].titulo }}</h3>
+          @if (projetos[livroAtual()].subtitulo) {
+            <span class="cover-subtitulo">{{ projetos[livroAtual()].subtitulo }}</span>
+          }
+          <span class="badge">{{ projetos[livroAtual()].tipo }}</span>
+          <p class="dica-hover">Passe o mouse para abrir o livro</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Seta Próximo -->
+    <button 
+      type="button"
+      class="seta-nav seta-proximo" 
+      (click)="proximoLivro()" 
+      [disabled]="livroAtual() === projetos.length - 1 || !!animacaoLivro()"
+      title="Próximo livro">
+      &#10095;
+    </button>
+
+  </div>
+
+  <!-- Indicadores de Livro / Navegação Rápida -->
+  <div class="livros-indicadores">
+    <span class="indicadores-label">Estante de Livros:</span>
+    <div class="pontos-lista">
+      @for (livro of projetos; track livro.titulo; let idx = $index) {
+        <button 
+          type="button"
+          class="btn-ponto-livro"
+          [class.ponto-ativo]="livroAtual() === idx"
+          (click)="selecionarLivro(idx)"
+          [attr.aria-label]="'Ir para livro ' + livro.titulo">
+          <span class="ponto-numero">{{ idx + 1 }}</span>
+          <span class="ponto-nome">{{ livro.titulo }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,377 @@
+<div class="meio-ambiente-page">
+
+  <!-- =========================================
+       1. HERO / CABEÇALHO DA BANCADA
+       ========================================= -->
+  <header class="eco-hero">
+    <div class="eco-badge">
+      <span class="badge-icon">🌿</span>
+      <span>Educação Ambiental & Pedagogia da Terra</span>
+    </div>
+
+    <h1 class="eco-title">Bancada de Campo & Sustentabilidade</h1>
+    
+    <p class="eco-manifesto">
+      Um laboratório vivo onde a terra, as sementes, as tintas naturais e os pequenos seres viram 
+      experiências pedagógicas de afeto, autonomia e investigação. 
+      <strong>Toque em qualquer objeto sobre a bancada para abrir o diário de bordo do projeto.</strong>
+    </p>
+
+    <!-- Filtro de Categorias -->
+    <div class="filtros-container">
+      <span class="filtro-label">Filtrar por eixo:</span>
+      <div class="filtros-pills">
+        @for (cat of categorias; track cat) {
+          <button 
+            type="button"
+            class="pill-btn" 
+            [class.pill-ativo]="categoriaSelecionada() === cat"
+            (click)="selecionarCategoria(cat)">
+            {{ cat }}
+          </button>
+        }
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================
+       2. A BANCADA INTERATIVA (MESA DE TRABALHO)
+       ========================================= -->
+  <section id="mesa-bancada" class="mesa-bancada-section">
+    <div class="mesa-madeira">
+      
+      <!-- Detalhes de textura e iluminação da mesa -->
+      <div class="mesa-cabecalho">
+        <div class="mesa-rotulo">
+          <span class="rotulo-icone">🗃️</span>
+          <span>Bancada de Experiências da Professora</span>
+        </div>
+        <div class="mesa-dica">
+          <span>✨ {{ projetosFiltrados().length }} vivências disponíveis • Clique para examinar</span>
+        </div>
+      </div>
+
+      <!-- Grade de Objetos sobre a Bancada -->
+      <div class="objetos-grid">
+        @for (projeto of projetosFiltrados(); track projeto.id) {
+          <div 
+            class="objeto-item"
+            [class.selecionado]="projetoAtivo()?.id === projeto.id"
+            (click)="abrirPrancheta(projeto)"
+            (mouseenter)="objetoHover.set(projeto.id)"
+            (mouseleave)="objetoHover.set(null)"
+            tabindex="0"
+            role="button"
+            [attr.aria-label]="'Abrir projeto ' + projeto.titulo">
+            
+            <!-- Fita Adesiva / Washi Tape no topo -->
+            <div class="washi-tape"></div>
+
+            <!-- Efeito de Iluminação / Fundo do Objeto -->
+            <div class="objeto-vitrine" [style.background]="projeto.objeto.corFundo">
+              <div class="objeto-icone-gigante">{{ projeto.objeto.icone }}</div>
+              
+              <!-- Badge Flutuante da Categoria -->
+              <span class="objeto-badge-categoria" [style.background-color]="projeto.categoriaCor">
+                {{ projeto.categoria }}
+              </span>
+            </div>
+
+            <!-- Etiqueta de Identificação Manuscrita -->
+            <div class="objeto-etiqueta">
+              <span class="objeto-nome-curto">{{ projeto.objeto.nomeCurto }}</span>
+              <h3 class="objeto-titulo">{{ projeto.titulo }}</h3>
+              <p class="objeto-subtitulo">{{ projeto.subtitulo }}</p>
+              
+              <div class="objeto-cta">
+                <span class="cta-texto">Examinar Prancheta</span>
+                <span class="cta-seta">➔</span>
+              </div>
+            </div>
+
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================
+       3. A PRANCHETA DE CAMPO (DETALHES DO PROJETO)
+       ========================================= -->
+  @if (projetoAtivo(); as p) {
+    <section id="prancheta-projeto" class="prancheta-container">
+      
+      <div class="prancheta-madeira">
+        
+        <!-- Clipe Metálico da Prancheta -->
+        <div class="clipe-metalico">
+          <div class="clipe-furo"></div>
+          <div class="clipe-base"></div>
+        </div>
+
+        <!-- Folha de Papel de Campo -->
+        <div class="folha-campo">
+
+          <!-- Topo da Folha com Navegação e Fechar -->
+          <div class="folha-topo">
+            <div class="folha-meta-topo">
+              <span class="folha-tag-categoria" [style.background-color]="p.categoriaCor">
+                {{ p.categoria }}
+              </span>
+              <span class="folha-codigo-bncc">BNCC: {{ p.bncc }}</span>
+            </div>
+
+            <button 
+              type="button" 
+              class="btn-fechar-prancheta" 
+              (click)="fecharPrancheta()"
+              title="Fechar e voltar para a mesa">
+              <span>✕ Fechar Diário</span>
+            </button>
+          </div>
+
+          <!-- Título e Introdução da Vivência -->
+          <div class="folha-cabecalho-projeto">
+            <div class="icone-destaque-projeto">{{ p.objeto.icone }}</div>
+            <div class="titulos-projeto">
+              <h2>{{ p.titulo }}</h2>
+              <p class="folha-subtitulo">{{ p.subtitulo }}</p>
+            </div>
+          </div>
+
+          <!-- Cartão de Ficha Técnica Pedagógica -->
+          <div class="ficha-tecnica-grid">
+            <div class="ficha-card">
+              <span class="ficha-icone">👶</span>
+              <div class="ficha-info">
+                <span class="ficha-rotulo">Faixa Etária</span>
+                <strong class="ficha-valor">{{ p.faixaEtaria }}</strong>
+              </div>
+            </div>
+
+            <div class="ficha-card">
+              <span class="ficha-icone">⏱️</span>
+              <div class="ficha-info">
+                <span class="ficha-rotulo">Duração</span>
+                <strong class="ficha-valor">{{ p.duracao }}</strong>
+              </div>
+            </div>
+
+            <div class="ficha-card">
+              <span class="ficha-icone">📍</span>
+              <div class="ficha-info">
+                <span class="ficha-rotulo">Espaço Ideal</span>
+                <strong class="ficha-valor">{{ p.espaco }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Impacto Principal em Destaque -->
+          <div class="banner-impacto">
+            <span class="impacto-estrela">🌟</span>
+            <p><strong>Impacto Real:</strong> {{ p.resumoImpacto }}</p>
+          </div>
+
+          <!-- Abas de Navegação Interna da Prancheta -->
+          <div class="prancheta-abas">
+            <button 
+              type="button"
+              class="aba-btn" 
+              [class.aba-ativa]="abaAtiva() === 'diario'"
+              (click)="mudarAba('diario')">
+              📖 Diário da Vivência
+            </button>
+            <button 
+              type="button"
+              class="aba-btn" 
+              [class.aba-ativa]="abaAtiva() === 'passos'"
+              (click)="mudarAba('passos')">
+              🧪 Passo a Passo (Como Fazer)
+            </button>
+            <button 
+              type="button"
+              class="aba-btn" 
+              [class.aba-ativa]="abaAtiva() === 'aprendizados'"
+              (click)="mudarAba('aprendizados')">
+              🌱 Aprendizados das Crianças
+            </button>
+            <button 
+              type="button"
+              class="aba-btn" 
+              [class.aba-ativa]="abaAtiva() === 'galeria'"
+              (click)="mudarAba('galeria')">
+              📸 Polaroids de Campo
+            </button>
+          </div>
+
+          <!-- Conteúdo da Aba 1: Diário da Vivência -->
+          @if (abaAtiva() === 'diario') {
+            <div class="aba-conteudo aba-diario">
+              <div class="aspas-decorativas">“</div>
+              <p class="texto-relato">{{ p.relato }}</p>
+              
+              <div class="nota-pedagogica">
+                <h4>📌 Nota Pedagógica da Professora</h4>
+                <p>
+                  A infância é o tempo da sensibilidade. Antes de falar sobre aquecimento global ou crises climáticas, 
+                  precisamos oferecer terra fértil, cheiro de flor e sementes nas mãos para que a criança ame o mundo natural. 
+                  Só cuidamos daquilo que aprendemos a amar.
+                </p>
+              </div>
+            </div>
+          }
+
+          <!-- Conteúdo da Aba 2: Passo a Passo e Materiais -->
+          @if (abaAtiva() === 'passos') {
+            <div class="aba-conteudo aba-passos">
+              
+              <!-- Caixa de Materiais Necessários -->
+              <div class="materiais-box">
+                <h4 class="materiais-titulo">
+                  <span>🧺</span> Materiais e Elementos Naturais Utilizados:
+                </h4>
+                <ul class="materiais-lista">
+                  @for (item of p.materiais; track item) {
+                    <li>{{ item }}</li>
+                  }
+                </ul>
+              </div>
+
+              <!-- Lista Sequencial de Passos -->
+              <div class="passos-timeline">
+                <h4 class="passos-titulo">
+                  <span>🗺️</span> Roteiro das Etapas com as Crianças:
+                </h4>
+                <div class="passos-grid">
+                  @for (passo of p.passos; track passo.ordem) {
+                    <div class="passo-card">
+                      <div class="passo-numero">{{ passo.ordem }}</div>
+                      <div class="passo-detalhes">
+                        <h5>{{ passo.titulo }}</h5>
+                        <p>{{ passo.descricao }}</p>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+
+            </div>
+          }
+
+          <!-- Conteúdo da Aba 3: Aprendizados e BNCC -->
+          @if (abaAtiva() === 'aprendizados') {
+            <div class="aba-conteudo aba-aprendizados">
+              <h4 class="aprendizados-titulo">
+                <span>🌱</span> Habilidades & Saberes Desenvolvidos:
+              </h4>
+
+              <div class="aprendizados-lista">
+                @for (ap of p.aprendizados; track ap) {
+                  <div class="aprendizado-item">
+                    <div class="aprendizado-icone">🌿</div>
+                    <p>{{ ap }}</p>
+                  </div>
+                }
+              </div>
+
+              <div class="alinhamento-bncc">
+                <h4>🎯 Alinhamento com a Base Nacional Comum Curricular (BNCC):</h4>
+                <p>
+                  <strong>Códigos e Campos de Experiência:</strong> {{ p.bncc }} — 
+                  Privilegia a exploração do espaço e do meio natural, a percepção dos elementos vitais 
+                  e a integração da arte e sensibilidade à vida cotidiana.
+                </p>
+              </div>
+            </div>
+          }
+
+          <!-- Conteúdo da Aba 4: Polaroids de Campo -->
+          @if (abaAtiva() === 'galeria') {
+            <div class="aba-conteudo aba-galeria">
+              <div class="polaroids-grid">
+                @for (foto of p.polaroids; track foto.titulo) {
+                  <div 
+                    class="polaroid-card"
+                    [style.transform]="'rotate(' + foto.rotacao + 'deg)'">
+                    
+                    <div class="polaroid-fita"></div>
+                    
+                    <div class="polaroid-foto-quadro" [style.background]="foto.fundoGradiente">
+                      <span class="polaroid-icone-central">{{ foto.icone }}</span>
+                    </div>
+
+                    <div class="polaroid-legenda">
+                      <strong>{{ foto.titulo }}</strong>
+                      <p>{{ foto.legenda }}</p>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Rodapé de Ações da Prancheta -->
+          <div class="folha-rodape">
+            <button type="button" class="btn-navegacao" (click)="projetoAnterior()">
+              ← Anterior
+            </button>
+            <button type="button" class="btn-navegacao btn-primario" (click)="fecharPrancheta()">
+              Voltar à Bancada
+            </button>
+            <button type="button" class="btn-navegacao" (click)="proximoProjeto()">
+              Próximo →
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+  }
+
+  <!-- =========================================
+       4. MURAL DE SEMENTES & IMPACTÔMETRO
+       ========================================= -->
+  <section class="mural-impacto-section">
+    <div class="mural-cabecalho">
+      <span class="mural-sub">Registros de Cuidado Coletivo</span>
+      <h2>O Fruto das Nossas Sementes</h2>
+      <p>Pequenas ações nas mãos de crianças geram transformações duradouras para toda a vida.</p>
+    </div>
+
+    <div class="impactometros-grid">
+      
+      <div class="impacto-card card-verde">
+        <div class="impacto-icone">🌻</div>
+        <div class="impacto-numero">+120</div>
+        <div class="impacto-titulo">Mudas Cultivadas</div>
+        <p class="impacto-desc">Hortaliças e temperos cuidados e colhidos pelas próprias crianças.</p>
+      </div>
+
+      <div class="impacto-card card-terracota">
+        <div class="impacto-icone">🎨</div>
+        <div class="impacto-numero">100%</div>
+        <div class="impacto-titulo">Biodegradável</div>
+        <p class="impacto-desc">Tintas e compostos naturais sem aditivos químicos ou microplásticos.</p>
+      </div>
+
+      <div class="impacto-card card-amarelo">
+        <div class="impacto-icone">🐝</div>
+        <div class="impacto-numero">15</div>
+        <div class="impacto-titulo">Espécies Observadas</div>
+        <p class="impacto-desc">Polinizadores e insetos acolhidos e catalogados com respeito.</p>
+      </div>
+
+      <div class="impacto-card card-azul">
+        <div class="impacto-icone">📜</div>
+        <div class="impacto-numero">35 kg</div>
+        <div class="impacto-titulo">Papel Reciclado</div>
+        <p class="impacto-desc">Transformados em cartões plantáveis que brotam flores.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>

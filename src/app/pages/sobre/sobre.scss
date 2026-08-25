@@ -1,0 +1,769 @@
+:host {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sobre-container-pagina {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+  box-sizing: border-box;
+  color: #38302A;
+}
+
+/* =========================================
+   CABEÇALHOS DE SEÇÃO PADRÃO
+   ========================================= */
+.secao-cabecalho {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+
+  .secao-badge {
+    display: inline-block;
+    background: #FDF0ED;
+    color: #D65E4B;
+    border: 1px solid #F0B2A6;
+    padding: 0.35rem 0.95rem;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+    font-weight: 800;
+    color: #2D241C;
+    margin: 0 0 0.6rem;
+    line-height: 1.25;
+  }
+
+  .secao-sub {
+    font-size: 1.05rem;
+    color: #6B5B4D;
+    line-height: 1.55;
+    margin: 0;
+  }
+}
+
+/* =========================================
+   1. HERO / APRESENTAÇÃO DA AUTORA
+   ========================================= */
+.sobre-hero-card {
+  background: #FFFFFF;
+  border: 2px solid #E8DCB8;
+  border-radius: 28px;
+  padding: 3rem;
+  box-shadow: 0 16px 40px rgba(60, 45, 25, 0.08);
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4.5rem;
+  animation: surgirSuave 0.5s ease-out;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+    text-align: center;
+  }
+}
+
+/* Coluna da Foto */
+.foto-coluna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  .foto-moldura-aquarela {
+    position: relative;
+    width: 260px;
+    height: 320px;
+    border-radius: 22px;
+    border: 4px solid #E8DCB8;
+    overflow: hidden;
+    background: #F8F3E6;
+    box-shadow: 0 12px 28px rgba(60, 45, 25, 0.12);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+
+      &:hover {
+        transform: scale(1.04);
+      }
+    }
+
+    .selo-autora-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid #D65E4B;
+      color: #D65E4B;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(4px);
+    }
+
+    @media (max-width: 900px) {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+
+      .selo-autora-badge {
+        bottom: 6px;
+      }
+    }
+  }
+
+  .redes-sociais-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .btn-social {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+
+      .social-svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+
+      &.btn-instagram {
+        background: #FDF0ED;
+        color: #D65E4B;
+        border: 1px solid #F0B2A6;
+
+        &:hover {
+          background: #D65E4B;
+          color: #FFFFFF;
+          transform: translateY(-2px);
+        }
+      }
+
+      &.btn-whatsapp {
+        background: #E7F3EC;
+        color: #366E4B;
+        border: 1px solid #C4DEC2;
+
+        &:hover {
+          background: #366E4B;
+          color: #FFFFFF;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+/* Coluna de Bio */
+.bio-coluna {
+  display: flex;
+  flex-direction: column;
+
+  .bio-topo {
+    margin-bottom: 1.25rem;
+
+    .bio-tag {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #366E4B;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .bio-nome {
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      color: #2D241C;
+      margin: 0 0 0.4rem;
+      line-height: 1.2;
+
+      span {
+        color: #D65E4B;
+      }
+    }
+
+    .bio-profissao {
+      font-size: 1.05rem;
+      color: #6B5B4D;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+
+  /* Manifesto em Destaque */
+  .manifesto-card {
+    background: #FFFDF8;
+    border-left: 4px solid #D65E4B;
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(214, 94, 75, 0.06);
+
+    .aspas-icone {
+      font-size: 3.5rem;
+      color: #F6C8BE;
+      font-family: serif;
+      position: absolute;
+      top: -15px;
+      left: 8px;
+      line-height: 1;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .manifesto-frase {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      font-weight: 700;
+      color: #3B2A1E;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  .bio-paragrafos {
+    color: #4A3E35;
+    font-size: 1.02rem;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+
+    p {
+      margin: 0 0 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      strong {
+        color: #2D241C;
+      }
+    }
+  }
+
+  .bio-botoes-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.85rem;
+
+    @media (max-width: 900px) {
+      justify-content: center;
+    }
+
+    .btn-cta {
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.75rem 1.4rem;
+      border-radius: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      &.btn-cta-primario {
+        background: #366E4B;
+        color: #FFFFFF;
+        border: none;
+        box-shadow: 0 4px 14px rgba(54, 110, 75, 0.25);
+
+        &:hover {
+          background: #275237;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(54, 110, 75, 0.35);
+        }
+      }
+
+      &.btn-cta-secundario {
+        background: #FAF6EE;
+        border: 1.5px solid #E0D1B8;
+        color: #4A3A2A;
+
+        &:hover {
+          background: #F4ECE0;
+          border-color: #366E4B;
+          color: #366E4B;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+/* =========================================
+   2. A JORNADA EM 3 CAPÍTULOS
+   ========================================= */
+.jornada-section {
+  margin-bottom: 4.5rem;
+}
+
+.capitulos-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-capitulo-aba {
+  background: #FFFFFF;
+  border: 2px solid #E8DCB8;
+  border-radius: 18px;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 12px rgba(60, 45, 25, 0.04);
+
+  .aba-icone-box {
+    font-size: 2.2rem;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .aba-textos {
+    display: flex;
+    flex-direction: column;
+
+    .aba-num {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8C7C6D;
+    }
+
+    .aba-tit {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #2D241C;
+      line-height: 1.25;
+      margin-top: 2px;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: #366E4B;
+    box-shadow: 0 8px 20px rgba(54, 110, 75, 0.12);
+
+    .aba-icone-box {
+      transform: scale(1.15) rotate(4deg);
+    }
+  }
+
+  &.capitulo-ativo {
+    border-color: #366E4B;
+    background: #FFFDF9;
+    box-shadow: 0 0 0 3px rgba(54, 110, 75, 0.18), 0 8px 22px rgba(54, 110, 75, 0.15);
+
+    .aba-num {
+      color: #366E4B;
+    }
+
+    .aba-tit {
+      color: #366E4B;
+    }
+  }
+}
+
+/* Card do Capítulo Ativo */
+.capitulo-exibicao-card {
+  background: #FFFFFF;
+  border: 2px solid #E8DCB8;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 12px 32px rgba(60, 45, 25, 0.07);
+
+  @media (max-width: 640px) {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .capitulo-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1.5px dashed #E8DCB8;
+
+    .cap-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #2D241C;
+      margin: 0 0 0.3rem;
+    }
+
+    .cap-sub {
+      font-size: 0.95rem;
+      color: #6B5B4D;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .capitulo-icone-grande {
+      font-size: 3.2rem;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
+    }
+  }
+
+  .capitulo-corpo {
+    .capitulo-relato {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #453A30;
+      margin: 0 0 2rem;
+      white-space: pre-line;
+    }
+
+    .capitulo-destaques-box {
+      background: #FAF7F0;
+      border: 1.5px solid #E5D9C8;
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+
+      h4 {
+        margin: 0 0 0.85rem;
+        font-size: 1rem;
+        font-weight: 800;
+        color: #366E4B;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+
+        li {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+          font-size: 0.95rem;
+          color: #3B3026;
+          line-height: 1.5;
+
+          .bullet-check {
+            color: #366E4B;
+            font-weight: 900;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* =========================================
+   3. O QUE POSSO CRIAR (SERVIÇOS EDITORIAIS)
+   ========================================= */
+.servicos-section {
+  margin-bottom: 4.5rem;
+}
+
+.servicos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.servico-card {
+  background: #FFFFFF;
+  border: 2px solid #E8DCB8;
+  border-radius: 22px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 8px 24px rgba(60, 45, 25, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: #366E4B;
+    box-shadow: 0 16px 36px rgba(54, 110, 75, 0.14);
+
+    .servico-icone-circulo {
+      transform: scale(1.1) rotate(4deg);
+      background: #E7F3EC;
+    }
+  }
+
+  .servico-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1.1rem;
+
+    .servico-icone-circulo {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: #FAF6EE;
+      border: 1px solid #E8DCB8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .servico-tag-publico {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border: 1.5px solid currentColor;
+      padding: 0.25rem 0.6rem;
+      border-radius: 8px;
+      text-align: right;
+    }
+  }
+
+  .servico-titulo {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #2D241C;
+    margin: 0 0 0.3rem;
+  }
+
+  .servico-sub {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #D65E4B;
+    margin-bottom: 0.85rem;
+    display: block;
+  }
+
+  .servico-desc {
+    font-size: 0.92rem;
+    color: #635548;
+    line-height: 1.55;
+    margin: 0;
+    flex-grow: 1;
+  }
+}
+
+/* =========================================
+   4. UNIVERSO AFETIVO & INSPIRAÇÕES (SCRAPBOOK)
+   ========================================= */
+.universo-afetivo-section {
+  margin-bottom: 4.5rem;
+}
+
+.notas-afetivas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+.nota-card {
+  border: 1.5px solid #E8DCB8;
+  border-radius: 18px;
+  padding: 2rem 1.4rem 1.5rem;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(60, 45, 25, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px) rotate(0.5deg);
+    box-shadow: 0 12px 28px rgba(60, 45, 25, 0.12);
+  }
+
+  .nota-tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1.5deg);
+    width: 80px;
+    height: 20px;
+    background: rgba(228, 214, 192, 0.8);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    border-left: 2px dashed rgba(180, 160, 130, 0.35);
+    border-right: 2px dashed rgba(180, 160, 130, 0.35);
+  }
+
+  .nota-icone {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .nota-titulo {
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: #2D241C;
+    margin: 0 0 0.5rem;
+  }
+
+  .nota-desc {
+    font-size: 0.88rem;
+    color: #5C4D3E;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+/* =========================================
+   5. CARTA DE CONTATO DIRETO
+   ========================================= */
+.carta-contato-section {
+  margin-bottom: 2rem;
+}
+
+.envelope-card {
+  background: #FFFDF9;
+  border: 2px solid #E8DCB8;
+  border-radius: 28px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(60, 45, 25, 0.08);
+  position: relative;
+  max-width: 840px;
+  margin: 0 auto;
+
+  @media (max-width: 640px) {
+    padding: 2rem 1.25rem;
+    border-radius: 20px;
+  }
+
+  .carimbo-postal {
+    display: inline-block;
+    background: #FDF0ED;
+    border: 1.5px dashed #D65E4B;
+    color: #D65E4B;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.95rem;
+    border-radius: 30px;
+    margin-bottom: 1.2rem;
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 900;
+    color: #2D241C;
+    margin: 0 0 1rem;
+  }
+
+  .carta-texto {
+    font-size: 1.05rem;
+    color: #5E5042;
+    line-height: 1.65;
+    max-width: 680px;
+    margin: 0 auto 2rem;
+
+    strong {
+      color: #366E4B;
+    }
+  }
+
+  .carta-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+
+    .btn-carta {
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 700;
+      padding: 0.85rem 1.6rem;
+      border-radius: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+
+      &.btn-carta-verde {
+        background: #366E4B;
+        color: #FFFFFF;
+        border: none;
+
+        &:hover {
+          background: #275237;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 22px rgba(54, 110, 75, 0.3);
+        }
+      }
+
+      &.btn-carta-coral {
+        background: #D65E4B;
+        color: #FFFFFF;
+        border: none;
+
+        &:hover {
+          background: #B84735;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 22px rgba(214, 94, 75, 0.3);
+        }
+      }
+    }
+  }
+}
+
+/* =========================================
+   ANIMAÇÕES
+   ========================================= */
+@keyframes surgirSuave {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animar-troca {
+  animation: surgirSuave 0.35s ease-out;
+}

@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* =========================================
+     PALETA STUDIO GHIBLI (TOTORO & KIKI)
+     ========================================= */
+  --ghibli-cream: #FDE5D7;
+  /* Pêssego Floral da Primavera Ghibli */
+  --ghibli-cream-dark: #F7CDB8;
+  /* Pêssego suave aveludado */
+  --ghibli-white: #FFFFFF;
+  /* Branco puro porcelana */
+
+  --ghibli-forest: #366E4B;
+  /* Verde Colina Totoro */
+  --ghibli-forest-dark: #275237;
+  /* Verde Floresta Profunda */
+  --ghibli-forest-light: #E7F3EC;
+  /* Verde Menta Claro */
+
+  --ghibli-coral: #D65E4B;
+  /* Coral Laço da Kiki */
+  --ghibli-coral-dark: #B84735;
+  /* Terracota Telhado Ghibli */
+  --ghibli-coral-light: #FDF0ED;
+  /* Pêssego / Rosa Chá */
+
+  --ghibli-sky: #4B93C4;
+  /* Azul Céu de Verão Ghibli */
+  --ghibli-sky-light: #EDF6FC;
+  /* Azul Nuvem */
+
+  --ghibli-sun: #EDA739;
+  /* Dourado Lanterna / Pólen */
+  --ghibli-sun-light: #FEF6E6;
+  /* Luz Solar */
+
+  --ghibli-text: #2D241C;
+  /* Nanquim Café Tostado */
+  --ghibli-text-muted: #6B5B4D;
+  /* Castanho Suave */
+  --ghibli-border: #E8DCB8;
+  /* Borda Papel Artesanal */
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  /* Degradê Pôr do Sol Ghibli: Pêssego Dourado -> Pêssego Rosa Crepúsculo */
+  background: linear-gradient(150deg, #FDE8DA 0%, #FEF1DE 35%, #FCD7C8 75%, #F6C8BE 100%);
+  background-attachment: fixed;
+  color: var(--ghibli-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}

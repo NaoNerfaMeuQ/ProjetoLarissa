@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://sua-api-producao.com/api',
+  apiUrl: 'https://portfolio-backend-d5ld.onrender.com/api',
   firebase: {
     apiKey: "AIzaSyBKAYhk_LkpcnWSr6UDI1WngcE8GQdDu2Y",
     authDomain: "larissahub.firebaseapp.com",

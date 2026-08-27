@@ -82,15 +82,15 @@
 }
 
 .home-hub {
-  height: calc(100dvh - 90px);
+  min-height: calc(100dvh - 90px);
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 1.5rem 1.25rem 3.5rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
+  width: 100%;
 }
 
 .boas-vindas {
@@ -135,7 +135,8 @@
   border: 2px solid #E8DCB8;
   border-radius: 20px;
   padding: 1.75rem 1.35rem;
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
   text-align: center;
   text-decoration: none;
   box-shadow: 0 8px 24px rgba(60, 45, 25, 0.06);
@@ -144,20 +145,29 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  &:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 12px rgba(60, 45, 25, 0.1);
+  }
 
   &:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 16px 36px rgba(54, 110, 75, 0.16);
-    border-color: #366E4B;
-
-    h3 {
-      color: #D65E4B;
-    }
-
-    .card-icone {
-      transform: scale(1.1) rotate(4deg);
-      background: #E7F3EC;
+    @media (hover: hover) {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 36px rgba(54, 110, 75, 0.16);
       border-color: #366E4B;
+
+      h3 {
+        color: #D65E4B;
+      }
+
+      .card-icone {
+        transform: scale(1.1) rotate(4deg);
+        background: #E7F3EC;
+        border-color: #366E4B;
+      }
     }
   }
 
@@ -188,5 +198,63 @@
     line-height: 1.5;
     font-size: 0.95rem;
     margin: 0;
+  }
+}
+
+/* =========================================
+   AJUSTES RESPONSIVOS (MOBILE / TABLET)
+   ========================================= */
+@media (max-width: 768px) {
+  .home-hub {
+    justify-content: flex-start;
+    padding: 1rem 1rem 3.5rem;
+  }
+
+  .boas-vindas {
+    margin-bottom: 1.5rem;
+
+    h1 {
+      font-size: 1.75rem;
+      line-height: 1.25;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      padding: 0 0.5rem;
+    }
+  }
+
+  .grade-projetos {
+    gap: 1rem;
+  }
+
+  .card-hub {
+    padding: 1.4rem 1.15rem;
+    max-width: 100%;
+
+    .card-icone {
+      width: 58px;
+      height: 58px;
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.35rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .splash-text {
+    font-size: 1.6rem;
+    padding: 0 1.5rem;
+  }
+
+  .splash-img {
+    width: 150px;
   }
 }

@@ -278,3 +278,59 @@ main {
   display: block;
   width: 100%;
 }
+
+/* =========================================
+   AJUSTES RESPONSIVOS PARA MOBILE (NAVBAR)
+   ========================================= */
+@media (max-width: 480px) {
+  header {
+    padding-top: max(0.8rem, env(safe-area-inset-top));
+    padding-bottom: 0.4rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  nav {
+    padding: 0.35rem 0.65rem;
+    max-width: 95vw;
+    box-shadow: 0 4px 16px rgba(60, 45, 25, 0.08);
+
+    .container-botoes {
+      gap: 0.4rem;
+    }
+  }
+
+  .button {
+    width: 125px;
+    height: 38px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+
+    &::before {
+      left: 38px;
+      width: calc(100% - 38px * 2 - 10px);
+    }
+
+    &::after {
+      right: 38px;
+    }
+
+    .button__text::before {
+      right: 38px;
+      width: calc(100% - 38px * 2 - 10px);
+    }
+
+    .button__text::after {
+      left: 38px;
+    }
+
+    .button__line {
+      width: 38px;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+

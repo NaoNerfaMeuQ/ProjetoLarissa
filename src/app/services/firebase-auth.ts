@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -7,10 +6,9 @@ import {
   onAuthStateChanged,
   User
 } from 'firebase/auth';
-import { environment } from '../../environments/environment';
+import { firebaseApp } from '../firebase';
 
-const app = initializeApp(environment.firebase);
-const auth = getAuth(app);
+const auth = getAuth(firebaseApp);
 
 @Injectable({
   providedIn: 'root'

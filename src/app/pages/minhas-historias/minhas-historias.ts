@@ -30,6 +30,13 @@ export class MinhasHistorias implements OnInit {
   carregandoLogin = signal<boolean>(false);
   enviandoImagem = signal<boolean>(false);
   erroLoginMsg = signal<string>('');
+  private readonly tiposImagemPermitidos = new Set([
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'image/gif',
+    'image/avif'
+  ]);
 
   credenciais = {
     email: '',
@@ -140,6 +147,11 @@ export class MinhasHistorias implements OnInit {
         input.value = '';
         return;
       }
+      if (!this.tiposImagemPermitidos.has(arquivo.type)) {
+        alert('Formato não permitido. Use JPG, PNG, WebP, GIF ou AVIF.');
+        input.value = '';
+        return;
+      }
 
       this.enviandoImagem.set(true);
       try {
@@ -165,6 +177,11 @@ export class MinhasHistorias implements OnInit {
       const arquivo = input.files[0];
       if (arquivo.size > 5 * 1024 * 1024) {
         alert('A imagem deve ter no máximo 5MB.');
+        return;
+      }
+      if (!this.tiposImagemPermitidos.has(arquivo.type)) {
+        alert('Formato não permitido. Use JPG, PNG, WebP, GIF ou AVIF.');
+        input.value = '';
         return;
       }
 

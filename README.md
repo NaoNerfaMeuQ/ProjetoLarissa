@@ -1,59 +1,64 @@
-# ProjetoLarissa
+# Larissa Hub - portfólio editorial interativo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.5.
+Aplicação Angular criada para apresentar o trabalho de uma autora em uma experiência editorial responsiva. Além das páginas institucionais, o projeto inclui publicação e leitura de histórias, editor de conteúdo rico, upload de imagens e uma área administrativa protegida por Firebase Authentication.
 
-## Development server
+## O que este projeto demonstra
 
-To start a local development server, run:
+- Angular com componentes standalone, Signals, rotas e serviços tipados.
+- Integração com uma API REST em Java/Spring Boot.
+- Autenticação Firebase e envio de JWT Bearer para operações administrativas.
+- Upload de imagens no Firebase Storage com validação de tipo, tamanho e caminho.
+- Conteúdo editorial dinâmico com tratamento contra XSS no frontend e no backend.
+- Interface responsiva, páginas temáticas e recursos interativos desenvolvidos sob medida.
 
-```bash
-ng serve
+## Arquitetura
+
+```text
+Angular/Vercel
+  |-- leitura pública ----------> Spring Boot/Render ----------> MongoDB
+  |-- login do autor -----------> Firebase Authentication
+  |-- JWT em escrita -----------> validação Firebase Admin + RBAC
+  `-- upload de imagens --------> Firebase Storage + regras de segurança
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+O backend relacionado está em [portfolio-backend](https://github.com/NaoNerfaMeuQ/portfolio-backend).
 
-## Code scaffolding
+## Segurança
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- A configuração web do Firebase é pública por definição; ela não substitui regras de segurança.
+- Escritas na API exigem token Firebase válido e allowlist ou custom claim `admin`.
+- As regras em `storage.rules` limitam escrita a administradores, imagens permitidas e 5 MB.
+- O backend sanitiza o HTML antes de persistir e o Angular o sanitiza novamente ao renderizar.
+- Credenciais privadas e arquivos locais de ambiente são ignorados pelo Git.
 
-```bash
-ng generate component component-name
-```
+Antes de publicar, restrinja a chave Firebase aos domínios usados e implante `storage.rules` no projeto correto. Consulte `SEGURANCA.md`.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Execução local
 
-```bash
-ng generate --help
-```
+### Pré-requisitos
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+- Node.js compatível com Angular 22
+- npm 11+
+- API `portfolio-backend` disponível em `http://localhost:8080`
 
 ```bash
-ng test
+npm ci
+npm start
 ```
 
-## Running end-to-end tests
+A aplicação ficará disponível em `http://localhost:4200`.
 
-For end-to-end (e2e) testing, run:
+## Qualidade
 
 ```bash
-ng e2e
+npm test -- --watch=false
+npm run build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Configuração
 
-## Additional Resources
+- `src/environments/environment.ts`: desenvolvimento local.
+- `src/environments/environment.prod.ts`: URL da API publicada.
+- `storage.rules`: política de acesso e validação de uploads.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Não adicione service accounts, senhas ou tokens ao repositório. A chave web Firebase presente no frontend deve continuar protegida por restrições de domínio e pelas regras do Firebase.
